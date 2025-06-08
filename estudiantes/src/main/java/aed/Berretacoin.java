@@ -5,8 +5,8 @@ import aed.Clases.*;
 import java.lang.reflect.Array;
 
 public class Berretacoin {
-    private Bloque bloque;
-    private Usuarios prioridadUsuarios ;
+    // private Bloque bloque;
+    private MaxHeap prioridadUsuarios ;
 
     // MaxHeap n_usuarios combinando con arreglos (HAnddles)
     // aca vamos almacenando la informacion de los demas bloques junto con el ultimobloque
@@ -21,7 +21,7 @@ public class Berretacoin {
 
 
     public Berretacoin(int n_usuarios){
-        ;
+        this.prioridadUsuarios = new MaxHeap(n_usuarios);
     }
 
     public void agregarBloque(Transaccion[] transacciones){
