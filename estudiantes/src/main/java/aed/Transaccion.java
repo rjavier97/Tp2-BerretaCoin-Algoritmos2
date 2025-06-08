@@ -17,12 +17,24 @@ public class Transaccion implements Comparable<Transaccion> {
 
     @Override
     public int compareTo(Transaccion otro) {    
+        int res = 0;
+
         if(otro == null){
             String mensajeDeError = "No puede compararse con null";
             throw new IllegalArgumentException(mensajeDeError);
+        } else {
+            if (this.monto - otro.monto > 0){
+                res = 1;
+            }
+            if (this.monto - otro.monto == 0){
+                res = 0;
+            }
+            if (this.monto - otro.monto <0){
+                res = -1;
+            }
         }
-            
-        return this.monto - otro.monto;
+        
+        return res ;
     }
 
     @Override

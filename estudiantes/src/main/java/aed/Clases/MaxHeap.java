@@ -15,7 +15,7 @@ public class MaxHeap{
         for (int i=1 ; i <= n_usuarios ; i++){
             array[i] = new Usuario(i,0);
         }
-        this.heapUsuarios = array ;
+        this.heapUsuarios = array;
         this.tamaño = n_usuarios;
         this.elementosUsados = 0;
     }
@@ -24,30 +24,29 @@ public class MaxHeap{
         return this.elementosUsados;
     }
 
-    public void insertar (int elem){
+    public void insertarUsuario (Usuario usuario){
+        int indice = elementosUsados;
+        int padre = 0;
+        Usuario otro;
         if (elementosUsados == 0){
-            heapUsuarios[0].setearMonto(elem) ;
-            elementosUsados ++ ;
+            heapUsuarios[0] = usuario;
         } else {
-            heapUsuarios[elementosUsados]=elem;
-            int indice = elementosUsados;
-            if (elementosUsados % 2 == 0){
-                while (elem != heapUsuarios[0] && elem>heapUsuarios[(indice-2)/2]) {
-                    int padre = heapUsuarios[indice];
-                    heapUsuarios[(indice-2)/2] = elem ;
-                    heapUsuarios[indice] = padre ;
-                    
-                    indice = (indice-2)/2 ;
+            padre = (indice-1) /2 ;
+            while (usuario != heapUsuarios[0] && usuario.compareTo(heapUsuarios[padre])==1 ) {
+                otro = heapUsuarios[padre];
+                heapUsuarios[padre] = usuario ; 
+                heapUsuarios[indice] = otro ;
+                padre = (padre-1) /2 ;
+                indice = (indice-1) /2 ;
 
-
-                }
             }
-
-
         }
-    } 
+        elementosUsados ++ ;
+    }
 
-}
+
+}   
+
 
 
 

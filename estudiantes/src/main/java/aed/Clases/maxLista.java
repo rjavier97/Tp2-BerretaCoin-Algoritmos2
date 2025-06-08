@@ -10,8 +10,6 @@ public class maxLista<T extends Comparable<T>> {
     private Integer[] arreglo;
 
 
-    
-
     public maxLista() {
         this.maximo = 0;
         this.tamaño = 0;
