@@ -17,15 +17,24 @@ public class maxLista<T extends Comparable<T>> {
     }
 
     public void insertar (Integer n){
-        this.tamaño += 1;
         Integer nuevo = n;
-        Integer[] nuevoArreglo = new Integer[tamaño+1];
-        for (int i = 0; i < tamaño; i++){
+        if(pertenece(n) == false){
+        this.tamaño += 1;
+        Integer[] nuevoArreglo = new Integer[tamaño];
+        if(tamaño == 1){
+            nuevoArreglo[0] = nuevo;
+            this.arreglo = nuevoArreglo;
+        }else{
+        for (int i = 0; i < tamaño - 1; i++){
             nuevoArreglo[i] = this.arreglo[i];
         }
         nuevoArreglo[tamaño - 1] = nuevo;
         this.arreglo = constructormaxLista(nuevoArreglo);
-        this.maximo = this.arreglo[0];
+        }
+        this.maximo = nuevo;
+    }
+        
+    
     }
 
     public maxLista (maxLista<T> lista){
@@ -38,6 +47,9 @@ public class maxLista<T extends Comparable<T>> {
     public Integer[] constructormaxLista(Integer[] arr) {
         this.tamaño = arr.length;
         Integer[] orden = arr;
+        if(this.tamaño == 1){
+            return orden;
+        }
         // Build heap (rearrange array)
         for (int i = tamaño / 2 - 1; i >= 0; i--) {
             heapify(orden, tamaño, i);
@@ -56,7 +68,7 @@ public class maxLista<T extends Comparable<T>> {
 
         
         if (left < n && arr[left] > arr[indiceMax]) {
-            maximo = left;
+            indiceMax = left;
         }
 
        
@@ -84,12 +96,12 @@ public class maxLista<T extends Comparable<T>> {
     }
 
 
-    public boolean pertenece(T elem){
+    public boolean pertenece(Integer elem){
             if(tamaño == 0){
                 return false;
             }
-            for (int i = 0; i > tamaño-1;i++){
-                if(arreglo[i] == elem){
+            for (int i = 0; i < tamaño;i++){
+                if(this.arreglo[i] == elem){
                     return true;
                 }
             }
@@ -98,5 +110,6 @@ public class maxLista<T extends Comparable<T>> {
     
 
 }
+
 
 
