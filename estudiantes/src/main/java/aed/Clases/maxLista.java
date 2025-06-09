@@ -10,12 +10,26 @@ public class maxLista<T extends Comparable<T>> {
     private Integer[] arreglo;
 
 
+    
+
     public maxLista() {
         this.maximo = 0;
         this.tamaño = 0;
         this. arreglo = new Integer[0];
     }
 
+    public maxLista<T> ordenar(Integer[] array){
+        maxLista<T> ordenada = new maxLista();
+        this.arreglo = constructormaxLista(array);
+        this.tamaño = array.length;
+        this.maximo = this.arreglo[0];
+        return ordenada;
+    }
+
+
+    public Integer maximo(){
+        return this.maximo;
+    }
     public void insertar (Integer n){
         Integer nuevo = n;
         if(pertenece(n) == false){
@@ -31,7 +45,7 @@ public class maxLista<T extends Comparable<T>> {
         nuevoArreglo[tamaño - 1] = nuevo;
         this.arreglo = constructormaxLista(nuevoArreglo);
         }
-        this.maximo = nuevo;
+        this.maximo = this.arreglo[0];
     }
         
     
