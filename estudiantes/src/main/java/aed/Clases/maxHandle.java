@@ -140,10 +140,10 @@ public class maxHandle<T extends Comparable<T>> {
         Nodo cambiar = this.base.get(indice);
         cambiar.elemento = cambiar.elemento + valor;
         this.base.set(indice, cambiar);
-        moverUno(indice, this.arreglo);
+        moverUno(indice);
     }
 
-    public void moverUno (int indice, ArrayList<Nodo> array){
+    public void moverUno (int indice){
         
         int indiceHeap = arreglo.indexOf(this.base.get(indice).alArbol);
         int indiceMovil = indiceHeap;
@@ -162,6 +162,8 @@ public class maxHandle<T extends Comparable<T>> {
                 arreglo.set(indiceMovil, swap);
                 break;
                 }
+                }else{
+                    break;
             }
         }
         if(indiceMovil == indiceHeap){
@@ -179,8 +181,8 @@ public class maxHandle<T extends Comparable<T>> {
         }
         for(; relacionIzq == true || relacionDer == true;){
             //si tiene una ramas mayores;
-            if((left < tamaño) & arreglo.get(indiceMovil).elemento < arreglo.get(left).elemento){
-        
+            if((left < tamaño) & arreglo.get(indiceMovil).elemento < arreglo.get(left).elemento & arreglo.get(left).elemento >= arreglo.get(right).elemento ){
+                
                 Nodo swap = arreglo.get(left);
                 arreglo.set(left, arreglo.get(indiceMovil));
                 arreglo.set(indiceMovil, swap);
@@ -204,6 +206,8 @@ public class maxHandle<T extends Comparable<T>> {
                 }else{
                     relacionDer = false;
                 }
+            }else{
+                break;
             }
         }
         }
@@ -217,5 +221,7 @@ public class maxHandle<T extends Comparable<T>> {
 
 
 }
+
+
 
 
