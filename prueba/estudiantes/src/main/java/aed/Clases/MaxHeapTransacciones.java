@@ -83,7 +83,7 @@ public class MaxHeapTransacciones {
         return montoTotalSinCreacion/tamañoSinCreacion ;
     } 
 
-    public Transaccion[] heap(){
+    public Transaccion[] devolverHeap(){
         return heap;
     }
 }
