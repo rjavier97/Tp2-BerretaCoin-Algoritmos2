@@ -15,6 +15,15 @@ class maxListaTests {
     }
 
     @Test
+    void transformar() {
+        maxLista<Integer> conjunto = new maxLista<Integer>();
+        Integer[] conj = {1,2,3,4,5,6};
+        conjunto.ordenar(conj);
+
+        assertTrue(conjunto.pertenece(4));
+        assertEquals(6, conjunto.maximo());
+    }
+    @Test
     void insertar_un_elemento() {
         maxLista<Integer> conjunto = new maxLista<Integer>();
 
@@ -400,3 +409,4 @@ class maxListaTests {
         }
     }
 }
+
