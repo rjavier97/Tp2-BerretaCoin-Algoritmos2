@@ -3,10 +3,8 @@ package aed.Clases;
 import aed.*;
 
 public class MaxHeapTransacciones {
-    // private (Transaccion,int)[] heap;
-    private HandleTr[] heap;
+    private HandleTr[] heap;  // Cada handle va a ser (Transaccion, posicion)
     private Transaccion[] transaccionesOriginal;
-    // private Handle[] handles;   // Cada handle va a ser (int posicion, Transaccion elemento  )
     private int tamaño;
     private int montoTotalSinCreacion;
     private int tamañoSinCreacion;
@@ -15,7 +13,6 @@ public class MaxHeapTransacciones {
         this.tamaño = transacciones.length;
         this.heap = new HandleTr[tamaño];
         for (int i = 0; i < tamaño; i++) {
-            // HandleTr h = new HandleTr(transacciones[i], i);
             heap[i] = new HandleTr(transacciones[i], i);
         }
         for (int i = tamaño / 2 - 1; i >= 0; i--) {
