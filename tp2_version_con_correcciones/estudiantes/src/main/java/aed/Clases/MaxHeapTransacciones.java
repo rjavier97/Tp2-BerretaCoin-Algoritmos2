@@ -5,11 +5,20 @@ import aed.*;
 // Referencias: P = cantidad de usuarios, T = cantidad de transacciones en el bloque
 
 public class MaxHeapTransacciones {
-    private HandleTr[] heap; // Cada handle va a ser (Transaccion, posicion)
+    private Heap[] heap; // Cada handle va a ser (Transaccion, posicion)
     private Transaccion[] transaccionesOriginal;
     private int tamaño;
     private int montoTotalSinCreacion;
     private int tamañoSinCreacion;
+
+    private class Heap {
+        private Transaccion elemento;
+        private Handle nodo;
+        public Heap (Transaccion i){
+            this.elemento = i;
+            this.nodo = new Handle(-1);
+        }
+        }
 
     // Constructor MaxHeapTransacciones() tiene complejidad O(T) pues si bien hay 3 ciclos, son independientes uno de otro, por ende la complejidad se lo lleva el maximo entre O(T) y O(log(T)) que es O(T)
     public MaxHeapTransacciones(Transaccion[] transacciones) {
@@ -22,11 +31,12 @@ public class MaxHeapTransacciones {
             tamañoSinCreacion ++ ;  //O(1)
         }
         }
-        this.heap = new HandleTr[tamaño];  //O(1)
+        this.heap = new Heap[tamaño];  //O(1)
         for (int i = 0; i < tamaño; i++) { //O(T)
-            heap[i] = new HandleTr(transacciones[i], i);  //O(1)
+            heap[i] = new Heap(transacciones[i]);  //O(1)
+            heap[i].nodo.modificarPosicion(i);
         }
-        for (int i = tamaño/2 - 1; i >= 0; i--) { // O(log(T))
+        for (int i = tamaño / 2 - 1; i >= 0; i--) { // O(log(T))
             bajar(i);   // O(log(T))
         }
         this.transaccionesOriginal = copiaTransacciones;  //O(1)
@@ -36,17 +46,17 @@ public class MaxHeapTransacciones {
     public void desencolar() {
         // Desde aca hasta la parte de bajar(0) (linea44) modificamos el heap HandleTr[]
         if (heap.length==1){   //O(1)
-            heap = new HandleTr[0];  //O(1)
+            heap = new Heap[0];  //O(1)
             transaccionesOriginal = new Transaccion[0];  //O(1)
             tamaño --;  //O(1)
             return ;  //O(1)
         }
-        HandleTr max = heap[0];  //O(1)
+        Heap max = heap[0];  //O(1)
         heap[0] = heap[tamaño-1];  //O(1)
         bajar(0);   //O(log(T))
         
         // Ahora vamos a modificar transaccionesOriginal
-        transaccionesOriginal[max.posicion()] = null ;  //O(1)
+        transaccionesOriginal[max.nodo.posicion()] = null ;  //O(1)
         tamaño -- ;  //O(1)
 
         // Aclaracion: la idea es mantener el mismo tamaño del arreglo transaccionesOriginal
@@ -66,14 +76,14 @@ public class MaxHeapTransacciones {
             int der = 2 * i + 2;  //O(1)
             int mayor = i;  //O(1)
 
-            if (izq < tamaño && heap[izq].elemento().compareTo(heap[mayor].elemento()) > 0){  //O(1)
+            if (izq < tamaño && heap[izq].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
                 mayor = izq;  //O(1)
             }
-            if (der < tamaño && heap[der].elemento().compareTo(heap[mayor].elemento()) > 0){  //O(1)
+            if (der < tamaño && heap[der].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
                 mayor = der;  //O(1)
             }
             if (mayor != i) {  //O(1)
-                HandleTr tmp = heap[i] ;  // O(1)
+                Heap tmp = heap[i] ;  // O(1)
                 heap[i] = heap[mayor];  //O(1)
                 heap[mayor] = tmp;   //O(1)
                 i = mayor;  //O(1)
@@ -83,7 +93,7 @@ public class MaxHeapTransacciones {
 
     // Metodo transaccionMayorValor() tiene complejidad O(1) pues hace un retorno que usa un metodo en O(1)
     public Transaccion transaccionMayorValor(){  //O(1)
-        return heap[0].elemento();  //O(1)
+        return heap[0].elemento;  //O(1)
     }
 
     // Metodo copia() tiene complejidad O(T) pues en el peor caso recorre todo el arreglo de transacciones
