@@ -17,7 +17,7 @@ public class Berretacoin {
     // Metodo agregarBloque() tiene complejidad O(T) * O(log(P)) pues itera T veces y cada vez en el peor caso entra al if
     public void agregarBloque(Transaccion[] transacciones) {
         bloqueActual = new MaxHeapTransacciones(transacciones); // O(T) // nuevo bloque reemplaza el anterior
-        Transaccion[] lista = bloqueActual.devolverHeap(); // O(1)
+        Transaccion[] lista = bloqueActual.copiaDeTransacciones(); // O(1)
         for (int i = 0; i < lista.length; i++) { // O(T)*(2*O(log(P))) pues itera T veces y cada vez en el peor caso entra al if 
             Transaccion t = lista[i];   // O(1)
             int comprador = t.id_comprador();   // O(1)
@@ -41,7 +41,7 @@ public class Berretacoin {
 
     // Metodo txUltimoBloque() tiene complejidad O(T)
     public Transaccion[] txUltimoBloque(){   // O(T)  
-        return bloqueActual.copia();    // O(T)
+        return bloqueActual.copiaDeTransacciones();    // O(T)
     }
 
     // Metodo maximoTenedor() tiene complejidad O(1)
@@ -50,11 +50,8 @@ public class Berretacoin {
 
     }
 
-    // Metodo montoMedioUltimoBloque() tiene complejidad O(1) pues solo es un condicional con un return en O(1) ambas
+    // Metodo montoMedioUltimoBloque() tiene complejidad O(1) pues es solo un return que se evalua en O(1)
     public int montoMedioUltimoBloque(){    // O(1)
-        if (bloqueActual.tamaño() == 0 || bloqueActual.devolverHeap().length == 0){ // O(1)
-            return 0;    // O(1)
-        }
         return bloqueActual.montoPromedio();    // O(1)
     }
 

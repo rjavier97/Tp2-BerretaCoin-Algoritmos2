@@ -26,7 +26,7 @@ public class MaxHeapTransacciones {
         for (int i = 0; i < tamaño; i++) { //O(T)
             heap[i] = new HandleTr(transacciones[i], i);  //O(1)
         }
-        for (int i = tamaño / 2 - 1; i >= 0; i--) { // O(log(T))
+        for (int i = tamaño/2 - 1; i >= 0; i--) { // O(log(T))
             bajar(i);   // O(log(T))
         }
         this.transaccionesOriginal = copiaTransacciones;  //O(1)
@@ -87,14 +87,14 @@ public class MaxHeapTransacciones {
     }
 
     // Metodo copia() tiene complejidad O(T) pues en el peor caso recorre todo el arreglo de transacciones
-    public Transaccion[] copia (){
+    public Transaccion[] copiaDeTransacciones (){
         Transaccion[] copiaTransacciones = new Transaccion[tamaño];  //O(1)
         int i = 0 ;  //O(1)
         int j = 0 ;  //O(1)
         if (heap.length == 0){  //O(1)
             return new Transaccion[0];  //O(1)
         }
-        while (i<tamaño & j<transaccionesOriginal.length){ // O(T)
+        while (i<tamaño){ // O(T)
             if (transaccionesOriginal[j] != null){  //O(1)
                 copiaTransacciones[i] = transaccionesOriginal[j] ;  //O(1)
                 i ++;  //O(1)
@@ -113,16 +113,16 @@ public class MaxHeapTransacciones {
 
     // Metodo montoPromedio() tiene complejidad O(1) pues solo es un condicional con return en O(1)
     public int montoPromedio(){
-        if (montoTotalSinCreacion <=0 && tamañoSinCreacion <= 0 ){  //O(1)
+        if (tamañoSinCreacion == 0 ){  //O(1)
             return 0;  //O(1)
         }   
         return montoTotalSinCreacion/tamañoSinCreacion ;  //O(1)
     } 
 
     // Metodo devolverHeap() tiene complejidad O(1) pues es solo un return
-    public Transaccion[] devolverHeap(){  //O(1)
-        return transaccionesOriginal;  //O(1)
-    }
+    // public Transaccion[] devolverHeap(){  //O(1)
+    //     return transaccionesOriginal;  //O(1)
+    // }
     
     // Metodo tamanoSinCreacion() tiene complejidad O(1) pues es solo un return
     public int tamañoSinCreacion(){  //O(1)
@@ -135,6 +135,7 @@ public class MaxHeapTransacciones {
         tamañoSinCreacion = _tamañoSinCreacion ;  //O(1)
     }
 
+    //--------------------------------------------------------------------------------------------------------------------
 
     public MaxHeapTransacciones() {  //O(1)
         this.tamaño = 0;  //O(1)
