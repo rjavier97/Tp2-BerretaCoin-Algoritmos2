@@ -15,21 +15,18 @@ public class Usuario implements Comparable<Usuario >{
     // Metodo compareTo() tiene complejidad O(1) pues solo hay condicionales anidados con asignaciones O(1)
     @Override
     public int compareTo(Usuario otro) {    // O(1)
-        int res = 0 ;    // O(1)
-
-        if (this.monto - otro.monto >0){    // O(1)
-            res = 1;    // O(1)
-        } 
-        if (this.monto - otro.monto <0){    // O(1)
-            res = -1 ;    // O(1)
-        } 
-        if (this.monto - otro.monto == 0){    // O(1)
-            if (this.id < otro.id){    // O(1)
-                res = 1;    // O(1)
-            } else {
-                res = -1;    // O(1)
-            }
+        if(otro == null){  //O(1)
+            String mensajeDeError = "No puede compararse con null";  //O(1)
+            throw new IllegalArgumentException(mensajeDeError);  //O(1)
         }
+        int res = 0 ;    // O(1)
+        int resta = this.monto - otro.monto;  // O(1)
+        if (resta>0 || (resta==0 && this.id<otro.id) ){  //O(1)
+            res = 1;  //O(1)
+        } 
+        if (resta<0 || (resta==0 && this.id>otro.id) ){  //O(1)
+            res = -1 ;  //O(1)
+        } 
         return res ;    // O(1)
     }
 
@@ -43,10 +40,11 @@ public class Usuario implements Comparable<Usuario >{
         return id;    // O(1)
     }
 
-    // Metodo handle() tiene complejidad O(1) pues solo es un return
-    public Handle handle(){    // O(1)
-        return handle;    // O(1)
+    // Metodo modificarPosicion() tiene complejidad O(1) pues solo es una asignacion
+    public void actualizarPosicionEnHeap(int _posicion){    // O(1)
+        handle.modificarPosicion(_posicion);        // O(1)
     }
+
      // Metodo modificarMonto() tiene complejidad O(1) pues solo es una asignacion
     public void modificarMonto(int nuevoMonto) {    // O(1)
         this.monto = nuevoMonto;    // O(1)

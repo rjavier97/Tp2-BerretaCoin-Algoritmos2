@@ -82,8 +82,8 @@ public class MaxHeapUsuarios {
         heap[i] = heap[j];  //O(1)
         heap[j] = tmp;  //O(1)
 
-        heap[i].handle().modificarPosicion(i);  //O(1)
-        heap[j].handle().modificarPosicion(j);  //O(1)
+        heap[i].actualizarPosicionEnHeap(i);  //O(1)
+        heap[j].actualizarPosicionEnHeap(j);  //O(1)
     }
 
     // Metodo usuarioEn() tiene complejidad O(1) pues solo retorna una posicion del atributo heap

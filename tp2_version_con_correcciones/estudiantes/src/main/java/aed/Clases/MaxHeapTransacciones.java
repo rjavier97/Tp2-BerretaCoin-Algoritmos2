@@ -14,11 +14,11 @@ public class MaxHeapTransacciones {
     private class Heap {
         private Transaccion elemento;
         private Handle nodo;
-        public Heap (Transaccion i){
-            this.elemento = i;
-            this.nodo = new Handle(-1);
+        public Heap (Transaccion i){ // O(1)
+            this.elemento = i;  // O(1)
+            this.nodo = new Handle(-1);  // O(1)
         }
-        }
+    }
 
     // Constructor MaxHeapTransacciones() tiene complejidad O(T) pues si bien hay 3 ciclos, son independientes uno de otro, por ende la complejidad se lo lleva el maximo entre O(T) y O(log(T)) que es O(T)
     public MaxHeapTransacciones(Transaccion[] transacciones) {
@@ -129,11 +129,6 @@ public class MaxHeapTransacciones {
         return montoTotalSinCreacion/tamañoSinCreacion ;  //O(1)
     } 
 
-    // Metodo devolverHeap() tiene complejidad O(1) pues es solo un return
-    // public Transaccion[] devolverHeap(){  //O(1)
-    //     return transaccionesOriginal;  //O(1)
-    // }
-    
     // Metodo tamanoSinCreacion() tiene complejidad O(1) pues es solo un return
     public int tamañoSinCreacion(){  //O(1)
         return tamañoSinCreacion;  //O(1)
