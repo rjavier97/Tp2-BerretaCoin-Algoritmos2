@@ -41,7 +41,7 @@ public class MaxHeapTransacciones {
         }
         this.transaccionesOriginal = copiaTransacciones;  //O(1)
     }
-
+    
     // Metodo desencolar() tiene complejidad O(log(T)) pues en el peor caso entra al if y queda O(1)+O(log(T)) => O(max{1,log(T)}) = O(log(T))
     public void desencolar() {
         // Desde aca hasta la parte de bajar(0) (linea44) modificamos el heap HandleTr[]
@@ -144,14 +144,13 @@ public class MaxHeapTransacciones {
         montoTotalSinCreacion = montoTotalSinCreacion - monto ;  //O(1)
         tamañoSinCreacion = _tamañoSinCreacion ;  //O(1)
     }
-
     //--------------------------------------------------------------------------------------------------------------------
 
     public MaxHeapTransacciones() {  //O(1)
         this.tamaño = 0;  //O(1)
         this.montoTotalSinCreacion = 0;  //O(1)
         this.tamañoSinCreacion = 0;  //O(1)
-        this.heap = new HandleTr[0];  //O(1)
+        this.heap = new Heap[0];  //O(1)
         this.transaccionesOriginal = new Transaccion[0];  //O(1)
     }
 
@@ -171,9 +170,10 @@ public class MaxHeapTransacciones {
         }
         this.montoTotalSinCreacion = varMonto;
         this.tamañoSinCreacion = varTamaño;
-        this.heap = new HandleTr[tamaño];  //O(1)
+        this.heap = new Heap[tamaño];  //O(1)
         for (int i = 0; i < tamaño; i++) { //O(T)
-            heap[i] = new HandleTr(transacciones[i], i);  //O(1)
+            heap[i] = new Heap(transacciones[i]);  //O(1)
+            heap[i].nodo.modificarPosicion(i);
         }
         for (int i = tamaño / 2 - 1; i >= 0; i--) { // O(log(T))
             bajar(i);   // O(log(T))
@@ -182,6 +182,7 @@ public class MaxHeapTransacciones {
         test = this;
         return test;
     }
+}    
 
-}
+
 

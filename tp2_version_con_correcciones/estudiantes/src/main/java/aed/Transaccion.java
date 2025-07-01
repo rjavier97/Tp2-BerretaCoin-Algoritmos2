@@ -21,41 +21,25 @@ public class Transaccion implements Comparable<Transaccion> {
             String mensajeDeError = "No puede compararse con null";  //O(1)
             throw new IllegalArgumentException(mensajeDeError);  //O(1)
         }
-
         int res = 0 ;  //O(1)
-
-        if (this.monto - otro.monto >0){  //O(1)
+        int resta = this.monto - otro.monto;
+        if (resta>0 || (resta==0 && this.id>otro.id) ){  //O(1)
             res = 1;  //O(1)
         } 
-        if (this.monto - otro.monto <0){  //O(1)
+        if (resta<0 || (resta==0 && this.id < otro.id) ){  //O(1)
             res = -1 ;  //O(1)
         } 
-        if (this.monto - otro.monto == 0){  //O(1)
-            if (this.id > otro.id){  //O(1)
-                res = 1;  //O(1)
-            } 
-            if(this.id < otro.id){  //O(1)
-                res = -1;  //O(1)
-            }
-            if (this.id == otro.id){  //O(1)
-                res = 0;  //O(1)
-            }
-        }
         return res ;  //O(1)
     }
 
     // Metodo equals() tiene complejidad O(1) pues son asignaciones + condicional + return
     @Override
-    public boolean equals(Object otro){
-        boolean otroEsNull = (otro == null);  //O(1)
-        boolean claseDistinta = otro.getClass() != this.getClass();  //O(1)
+    public boolean equals(Object otro){  // O(1)
 
-        if (otroEsNull || claseDistinta){  //O(1)
-            return false;  //O(1)
+        if(otro == null || otro.getClass() != this.getClass()) {  // O(1)
+            return false ;  // O(1)
         }
-
-        Transaccion otraTransaccion = (Transaccion) otro ;  //O(1)
-
+        Transaccion otraTransaccion = (Transaccion) otro ; //O(1)
         return (id == otraTransaccion.id && id_comprador == otraTransaccion.id_comprador   //O(1)
         && id_vendedor == otraTransaccion.id_vendedor && monto == otraTransaccion.monto);  //O(1)
 
