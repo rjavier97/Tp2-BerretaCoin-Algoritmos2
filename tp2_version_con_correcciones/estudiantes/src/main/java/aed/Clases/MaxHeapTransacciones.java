@@ -5,9 +5,9 @@ import aed.*;
 // Referencias: P = cantidad de usuarios, T = cantidad de transacciones en el bloque
 
 public class MaxHeapTransacciones {
-    private Heap[] heap; // Cada handle va a ser (Transaccion, posicion)
+    private Heap[] heap; // Cada handle va a ser (Transaccion, nodo) donde nodo significa la posicion
     private Transaccion[] transaccionesOriginal;
-    private int tamaño;
+    private int tamaño; //mantiene el tamaño del heap(si no se hackea tiene el mismo valor q tamaño de transaccionesOriginal)
     private int montoTotalSinCreacion;
     private int tamañoSinCreacion;
 
@@ -44,7 +44,6 @@ public class MaxHeapTransacciones {
     
     // Metodo desencolar() tiene complejidad O(log(T)) pues en el peor caso entra al if y queda O(1)+O(log(T)) => O(max{1,log(T)}) = O(log(T))
     public void desencolar() {
-        // Desde aca hasta la parte de bajar(0) (linea44) modificamos el heap HandleTr[]
         if (heap.length==1){   //O(1)
             heap = new Heap[0];  //O(1)
             transaccionesOriginal = new Transaccion[0];  //O(1)
@@ -56,17 +55,8 @@ public class MaxHeapTransacciones {
         bajar(0);   //O(log(T))
         
         // Ahora vamos a modificar transaccionesOriginal
-        transaccionesOriginal[max.nodo.posicion()] = null ;  //O(1)
+        transaccionesOriginal[max.nodo.posicion()] = null ;  //O(1)   //esta parte es para cuando hacemos copiaTransacciones
         tamaño -- ;  //O(1)
-
-        // Aclaracion: la idea es mantener el mismo tamaño del arreglo transaccionesOriginal
-        // Luego cuando usemos el metodo copiar() recorreremos uno x uno ( O(T) ), y copiaremos todo menos los elementos que sean null.
-        // Lo hacemos de esta manera para no perder la referencia que tiene el atributo heap que es de clase HandleTr
-        // que recordemos HandleTr tiene la forma de una tupla:   (Transaccion,posicion)
-        // esta posicion es exactamente el indice en el que se encontraba la transaccion cuando nos la dieron por parametro 
-        // al agregar bloque, es decir, en forma ordenada. 
-        // De esta manera cuando desencolemos, no vamos a estar cambiando los indices o cambiando el tamaño del atributo transaccionesOriginal
-        // para no perder la referencia con posicion de la tupla (Transaccion, posicion) correspondiente al atributo heap.
     }
 
     // Metodo bajar() tiene complejidad O(log(T))
@@ -95,6 +85,15 @@ public class MaxHeapTransacciones {
     public Transaccion transaccionMayorValor(){  //O(1)
         return heap[0].elemento;  //O(1)
     }
+
+    // Aclaracion: la idea es mantener el mismo tamaño del arreglo heap
+    // Luego cuando usemos el metodo copiar() recorreremos uno x uno ( O(T) ), y copiaremos todo menos los elementos que sean null.
+    // Lo hacemos de esta manera para no perder la referencia que tiene el atributo heap que es de clase Heap[]
+    // que recordemos heap tiene la forma de una tupla:   (Transaccion,posicion)
+    // esta posicion es exactamente el indice en el que se encontraba la transaccion cuando nos la dieron por parametro 
+    // al agregar bloque, es decir, en forma ordenada. 
+    // De esta manera cuando desencolemos, no vamos a estar cambiando los indices o cambiando el tamaño del atributo transaccionesOriginal
+    // para no perder la referencia con posicion de la tupla (Transaccion, posicion) correspondiente al atributo heap.
 
     // Metodo copia() tiene complejidad O(T) pues en el peor caso recorre todo el arreglo de transacciones
     public Transaccion[] copiaDeTransacciones (){

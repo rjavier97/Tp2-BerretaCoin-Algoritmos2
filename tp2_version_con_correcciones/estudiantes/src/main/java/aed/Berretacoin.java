@@ -28,7 +28,6 @@ public class Berretacoin {
                 int montoAnterior = heapUsuarios.obtenerMonto(comprador); // O(1)
                 heapUsuarios.actualizarMonto(comprador, montoAnterior - monto); // O(log(P))
             }
-
             int montoAnteriorV = heapUsuarios.obtenerMonto(vendedor); // O(1)
             heapUsuarios.actualizarMonto(vendedor, montoAnteriorV + monto); // O(log(P))
         }
@@ -55,23 +54,22 @@ public class Berretacoin {
         return bloqueActual.montoPromedio();    // O(1)
     }
 
-    // Metodo hachearTx() tiene complejidad O(log(T)+log(P)) pues son asignaciones anidadas con condicionales, de los cuales los mayores valores quedan en
-    // O(log(T)+O(log(P))) => O(log(T)+log(P)) 
+    // Metodo hachearTx() tiene complejidad O(log(T)+log(P)) pues son asignaciones anidadas con condicionales,
+    // de los cuales los mayores valores quedan en O(log(T)+O(log(P))) => O(log(T)+log(P)) 
     public void hackearTx(){    // O(log(T)+log(P))
         Transaccion max = bloqueActual.transaccionMayorValor();  // O(1)
         bloqueActual.desencolar();  // O(log(T))
-        int comprador = max.id_comprador();  // O(1)
-        int vendedor = max.id_vendedor();  // O(1)
-        int monto = max.monto();  // O(1)
-        if (comprador != 0){  // O(log(P))
+        actualizarLuegoDelHackeo(max.id_comprador(), max.id_vendedor(), max.monto() ); // O(log(P))
+    }
+
+    public void actualizarLuegoDelHackeo(int comprador, int vendedor, int monto){
+        if (comprador != 0){  // Es O(log(P)) por la suma de los 2 log(P) de abajo
             heapUsuarios.actualizarMonto(comprador, heapUsuarios.obtenerMonto(comprador) +monto);  // O(log(P))
             heapUsuarios.actualizarMonto(vendedor, heapUsuarios.obtenerMonto(vendedor) -monto);  // O(log(P))
             bloqueActual.modificarMontoMedio(monto,bloqueActual.tamañoSinCreacion()-1 );  // O(1)
-
         } else {
             heapUsuarios.actualizarMonto(vendedor, heapUsuarios.obtenerMonto(vendedor) -monto);  // O(log(P))
             bloqueActual.modificarMontoMedio(monto, bloqueActual.tamañoSinCreacion() ) ;  // O(1)
-
         }
     }
 
