@@ -87,14 +87,14 @@ public class MaxHeapUsuarios {
     }
 
     // Metodo usuarioEn() tiene complejidad O(1) pues solo retorna una posicion del atributo heap
-    public Usuario usuarioEn(int i) {  //O(1)
-        return heap[i];  //O(1)
-    }
+    // public Usuario usuarioEn(int i) {  //O(1)
+    //     return heap[i];  //O(1)
+    // }
 
     // Metodo cantidadUsuarios() tiene complejidad O(1) pues solo es un return de un atributo
-    public int cantidadUsuarios() {  //O(1)
-        return tamaño;  //O(1)
-    }
+    // public int cantidadUsuarios() {  //O(1)
+    //     return tamaño;  //O(1)
+    // }
 }
 
 

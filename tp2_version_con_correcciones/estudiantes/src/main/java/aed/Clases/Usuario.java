@@ -1,9 +1,9 @@
 package aed.Clases;
 
-public class Usuario implements Comparable<Usuario >{
+public class Usuario implements Comparable<Usuario>{
     private int id;
     private int monto;
-    private Handle handle;
+    private Handle handle; //posicion
 
     // Metodo Usuario() tiene complejidad O(1) pues solo hace asignaciones
     public Usuario(int id, int monto, Handle handle) {

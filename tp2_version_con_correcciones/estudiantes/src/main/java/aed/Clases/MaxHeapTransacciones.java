@@ -11,14 +11,14 @@ public class MaxHeapTransacciones {
     private int montoTotalSinCreacion;
     private int tamañoSinCreacion;
 
-    private class Heap {
-        private Transaccion elemento;
-        private Handle nodo;
-        public Heap (Transaccion i){ // O(1)
-            this.elemento = i;  // O(1)
-            this.nodo = new Handle(-1);  // O(1)
-        }
-    }
+    // private class Heap {
+    //     private Transaccion elemento;
+    //     private Handle nodo;
+    //     public Heap (Transaccion i){ // O(1)
+    //         this.elemento = i;  // O(1)
+    //         this.nodo = new Handle(-1);  // O(1)
+    //     }
+    // }
 
     // Constructor MaxHeapTransacciones() tiene complejidad O(T) pues si bien hay 3 ciclos, son independientes uno de otro, por ende la complejidad se lo lleva el maximo entre O(T) y O(log(T)) que es O(T)
     public MaxHeapTransacciones(Transaccion[] transacciones) {
@@ -60,26 +60,26 @@ public class MaxHeapTransacciones {
     }
 
     // Metodo bajar() tiene complejidad O(log(T))
-    private void bajar(int i) {
-        while (true) {  // Este ciclo siempre va a estar comparando una cantidad de veces como mucho igual a la altura del heap, que podemos pensarlo como altura = log(T)
-            int izq = 2 * i + 1;  //O(1)
-            int der = 2 * i + 2;  //O(1)
-            int mayor = i;  //O(1)
+    // private void bajar(int i) {
+    //     while (true) {  // Este ciclo siempre va a estar comparando una cantidad de veces como mucho igual a la altura del heap, que podemos pensarlo como altura = log(T)
+    //         int izq = 2 * i + 1;  //O(1)
+    //         int der = 2 * i + 2;  //O(1)
+    //         int mayor = i;  //O(1)
 
-            if (izq < tamaño && heap[izq].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
-                mayor = izq;  //O(1)
-            }
-            if (der < tamaño && heap[der].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
-                mayor = der;  //O(1)
-            }
-            if (mayor != i) {  //O(1)
-                Heap tmp = heap[i] ;  // O(1)
-                heap[i] = heap[mayor];  //O(1)
-                heap[mayor] = tmp;   //O(1)
-                i = mayor;  //O(1)
-            } else break;  //O(1)
-        }
-    }
+    //         if (izq < tamaño && heap[izq].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
+    //             mayor = izq;  //O(1)
+    //         }
+    //         if (der < tamaño && heap[der].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
+    //             mayor = der;  //O(1)
+    //         }
+    //         if (mayor != i) {  //O(1)
+    //             Heap tmp = heap[i] ;  // O(1)
+    //             heap[i] = heap[mayor];  //O(1)
+    //             heap[mayor] = tmp;   //O(1)
+    //             i = mayor;  //O(1)
+    //         } else break;  //O(1)
+    //     }
+    // }
 
     // Metodo transaccionMayorValor() tiene complejidad O(1) pues hace un retorno que usa un metodo en O(1)
     public Transaccion transaccionMayorValor(){  //O(1)
@@ -112,7 +112,7 @@ public class MaxHeapTransacciones {
                 j ++;  //O(1)
             }
         }
-        return copiaTransacciones;  //O(1)
+        return copiaTransacciones; 
     }
     
     // Metodo tamano() tiene complejidad O(1) pues es un solo return
