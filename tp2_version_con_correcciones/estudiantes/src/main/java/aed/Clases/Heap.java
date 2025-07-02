@@ -7,24 +7,31 @@ public class Heap<T extends Comparable<T>>{
     private ArrayList<Tupla> heap;
     private int tamaño;
     
-    private class Tupla {
+    public class Tupla {
         private T elemento;
         private Handle nodo;
         public Tupla (T i){ // O(1)
             this.elemento = i;  // O(1)
             this.nodo = new Handle(-1);  // O(1)
         }
+        public Handle nodo(){
+            return nodo;
+        }
+        public T elemento(){
+            return elemento;
+        }
     }
 
     public Heap(T[] _lista) {
         this.tamaño = _lista.length;  //O(1)
-        ArrayList<T> copiaElementos = new ArrayList<T>();  //O(1)
+        // ArrayList<T> copiaElementos = new ArrayList<T>();  //O(1)
         ArrayList<Tupla> nuevoHeap = new ArrayList<Tupla>();
         for(int i =0 ; i<this.tamaño ; i++){ // O(T)
-            copiaElementos.add(_lista[i]) ;  //O(1)
+            // copiaElementos.add(_lista[i]) ;  //O(1)
             nuevoHeap.add(new Tupla(_lista[i]));
             nuevoHeap.get(i).nodo.modificarPosicion(i);
         }
+        heap = nuevoHeap;
         for (int i = tamaño / 2 - 1; i >= 0; i--) { // O(log(T))
             bajar(i);   // O(log(T))
         }
@@ -77,6 +84,19 @@ public class Heap<T extends Comparable<T>>{
         Tupla tmp = heap.get(i);  //O(1)
         heap.set(i, heap.get(j));
         heap.set(j,tmp);  //O(1)
+    }
+
+
+    public ArrayList<Tupla> devolverHeap (){
+        return heap ;
+    }
+
+    public int tamaño(){
+        return tamaño;
+    }
+
+    public Tupla devolverMax(){
+        return heap.get(0);
     }
 
 }

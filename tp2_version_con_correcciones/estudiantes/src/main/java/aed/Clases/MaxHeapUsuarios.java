@@ -1,30 +1,33 @@
 package aed.Clases;
 
+import aed.Transaccion;
+
 // Referencias: P = cantidad de usuarios, T = cantidad de transacciones en el bloque
     
 public class MaxHeapUsuarios {
-    private Usuario[] heap;
+    private Heap<Usuario> heap;
     private int tamaño;
-    private Handle[] handles;
+    private Usuario[] arregloUsuarios;
     
     // Constructor MaxHeapUsuarios() tiene complejidad O(P) pues recorre y hace asignaciones O(1) P veces.
     public MaxHeapUsuarios(int cantidadUsuarios) {  //O(P)
-        this.heap = new Usuario[cantidadUsuarios];  //O(1)
-        this.handles = new Handle[cantidadUsuarios];  //O(1)
+        // this.heap = new Usuario[cantidadUsuarios];  //O(1)
+        // this.handles = new Handle[cantidadUsuarios];  //O(1)
         this.tamaño = cantidadUsuarios;  //O(1)
-
+        Usuario[] _arregloUsuarios = new Usuario[tamaño];
         for (int i = 0; i < cantidadUsuarios; i++) {    // O(P)
-            Handle h = new Handle(i);   // O(1)
-            Usuario u = new Usuario(i + 1, 0, h);   // O(1)
-            heap[i] = u;   // O(1)
-            handles[i] = h;   // O(1)
+            Usuario u = new Usuario(i + 1, 0);   // O(1)
+            _arregloUsuarios[i] = u;   // O(1)
         }
+        arregloUsuarios = _arregloUsuarios;
+        Heap<Usuario> _heap = new Heap(_arregloUsuarios) ;
+        heap = _heap;
     }
 
     // Metodo actualizarMonto() tiene complejidad O(log(P)) pues usa metodos subir() o bajar() que son O(log(P))
     public void actualizarMonto(int idUsuario, int nuevoMonto) {   //O(log(P))
-        int i = handles[idUsuario - 1].posicion();   //O(1)
-        Usuario u = heap[i];   //O(1)
+        // int i = handles[idUsuario - 1].posicion();   //O(1)
+        Usuario u = heap.get(i).elemento();   //O(1)
         int anterior = u.monto();   //O(1)
         u.modificarMonto(nuevoMonto);   //O(1)
         if (nuevoMonto > anterior) {
@@ -82,7 +85,7 @@ public class MaxHeapUsuarios {
         heap[i] = heap[j];  //O(1)
         heap[j] = tmp;  //O(1)
 
-        heap[i].actualizarPosicionEnHeap(i);  //O(1)
+        heap.get(i).;  //O(1)
         heap[j].actualizarPosicionEnHeap(j);  //O(1)
     }
 

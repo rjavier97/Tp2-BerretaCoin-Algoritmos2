@@ -3,13 +3,11 @@ package aed.Clases;
 public class Usuario implements Comparable<Usuario>{
     private int id;
     private int monto;
-    private Handle handle; //posicion
 
     // Metodo Usuario() tiene complejidad O(1) pues solo hace asignaciones
-    public Usuario(int id, int monto, Handle handle) {
+    public Usuario(int id, int monto) {
         this.id = id;    // O(1 
         this.monto = monto;    // O(1)
-        this.handle = handle;    // O(1)
     }
 
     // Metodo compareTo() tiene complejidad O(1) pues solo hay condicionales anidados con asignaciones O(1)
@@ -41,9 +39,9 @@ public class Usuario implements Comparable<Usuario>{
     }
 
     // Metodo modificarPosicion() tiene complejidad O(1) pues solo es una asignacion
-    public void actualizarPosicionEnHeap(int _posicion){    // O(1)
-        handle.modificarPosicion(_posicion);        // O(1)
-    }
+    // public void actualizarPosicionEnHeap(int _posicion){    // O(1)
+    //     handle.modificarPosicion(_posicion);        // O(1)
+    // }
 
      // Metodo modificarMonto() tiene complejidad O(1) pues solo es una asignacion
     public void modificarMonto(int nuevoMonto) {    // O(1)
