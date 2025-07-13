@@ -80,17 +80,17 @@ public class MaxHeapTransacciones {
     //     tamaño -- ;  //O(1)
     // }
     public void desencolar() {
-        if (heap.tamaño() == 0) {
+        if (heap.tamaño() == 0) {  // O(1)
             return;
         }
-        Transaccion max = heap.maximo();
+        Transaccion max = heap.maximo();  // O(1)
         int posicion = buscarPosicionOriginal(max); 
-        if (posicion != -1) {
-            transaccionesOriginal[posicion] = null;
+        if (posicion != -1) {  // O(1)
+            transaccionesOriginal[posicion] = null;  // O(1)
         }
 
-        heap.desencolar();
-        tamaño--;
+        heap.desencolar(); // O(log T)
+        tamaño--;  // O(1)
     }
 
     // O(T)
@@ -131,7 +131,7 @@ public class MaxHeapTransacciones {
         return copia;
     }
     
-    // Metodo tamano() tiene complejidad O(1) pues es un solo return
+    // Metodo tamaño() tiene complejidad O(1) pues es un solo return
     public int tamaño(){  //O(1)
         return tamaño;  //O(1)
     }

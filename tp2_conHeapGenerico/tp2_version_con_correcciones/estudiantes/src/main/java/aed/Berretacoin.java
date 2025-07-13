@@ -54,16 +54,16 @@ public class Berretacoin {
         return bloqueActual.montoPromedio();    // O(1)
     }
 
-    // Metodo hachearTx() tiene complejidad O(log(T)+log(P)) pues son asignaciones anidadas con condicionales,
-    // de los cuales los mayores valores quedan en O(log(T)+O(log(P))) => O(log(T)+log(P)) 
+    // Metodo hachearTx() tiene complejidad O( log(T) + log(P) ) 
     public void hackearTx(){    // O(log(T)+log(P))
         Transaccion max = bloqueActual.transaccionMayorValor();  // O(1)
         bloqueActual.desencolar();  // O(log(T))
         actualizarLuegoDelHackeo(max.id_comprador(), max.id_vendedor(), max.monto() ); // O(log(P))
     }
 
+    // Este metodo extra de Berretacoin es O(log(P)) por la suma de los 2 log(P) de abajo
     public void actualizarLuegoDelHackeo(int comprador, int vendedor, int monto){
-        if (comprador != 0){  // Es O(log(P)) por la suma de los 2 log(P) de abajo
+        if (comprador != 0){  
             heapUsuarios.actualizarMonto(comprador, heapUsuarios.obtenerMonto(comprador) +monto);  // O(log(P))
             bloqueActual.modificarMontoMedio(monto,bloqueActual.tamañoSinCreacion()-1 );  // O(1)
         } else {

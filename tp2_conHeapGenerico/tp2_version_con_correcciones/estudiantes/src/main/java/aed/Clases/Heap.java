@@ -15,7 +15,7 @@ public class Heap<T extends Comparable<T> > {
         }
     }
 
-    public void desencolar() { // O(log P)
+    public void desencolar() { // O(log n)
         if (tamaño == 0) { // O(1)
             return;
         }    
@@ -36,11 +36,11 @@ public class Heap<T extends Comparable<T> > {
        return elementos; // O(1)
     }
 
-    // El Metodo subir() tiene complejidad log(P) pues recibe la posicion del usuario en el handle,
+    // El Metodo subir() tiene complejidad log(n) pues recibe la posicion del usuario en el handle,
     // que en el peor caso si esta en la ultima posicion (que es la cantidad de usuarios)     
-    // recorrera como mucho la altura del heap, es decir log(P) 
+    // recorrera como mucho la altura del heap, es decir log(n) 
     public void subir(int i) {
-        while (i > 0) { // O(log P)
+        while (i > 0) { // O(log n)
             int padre = (i - 1) / 2; // O(1)
             if (elementos[i].compareTo(elementos[padre]) > 0) { // O(1)
                 swap(i, padre);  // O(1)
@@ -51,11 +51,11 @@ public class Heap<T extends Comparable<T> > {
         }
     }
 
-    // El Metodo bajar() tiene complejidad O(log(T))
+    // El Metodo bajar() tiene complejidad O(log(n))
     // ya que el siguiente ciclo siempre va a estar comparando una cantidad de veces como mucho igual a la altura del heap,
-    // que podemos pensarlo como altura = log(T)
-    public void bajar(int i) {  // O(log T)
-        while (true) {  // O(log T)
+    // que podemos pensarlo como altura = log(n)
+    public void bajar(int i) {  // O(log n)
+        while (true) {  // O(log n)
             int izq = 2 * i + 1; // O(1)
             int der = 2 * i + 2; // O(1)
             int mayor = i; // O(1)
@@ -73,6 +73,9 @@ public class Heap<T extends Comparable<T> > {
     }
 
     // Metodo swap() tiene complejidad O(1) pues solo hace asignaciones y usa metodos en O(1)
+    //Aclaraciones: las primeras 3 lineas de este metodo se aplican tanto en MaxHeapTransacciones como en MaxHeapUsuarios
+    // Luego de eso, si T=Usuario vamos a querer hacer algo más, que en este caso será actualizar 
+    // las posiciones del Usuario en el Handle cuando hagamos swap. Solo hacemos esto ultimo si T=Usuario
     private void swap(int i, int j) {
         T temp = elementos[i];  // O(1)
         elementos[i] = elementos[j];  // O(1)
