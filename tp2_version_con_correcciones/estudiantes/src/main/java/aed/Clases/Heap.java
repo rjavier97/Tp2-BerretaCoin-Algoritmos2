@@ -18,16 +18,14 @@ public class Heap<T extends Comparable<T>>{
             return nodo;
         }
         public T elemento(){
-            return elemento;
-        }
+            return elemento;   
+        } 
     }
 
     public Heap(T[] _lista) {
         this.tamaño = _lista.length;  //O(1)
-        // ArrayList<T> copiaElementos = new ArrayList<T>();  //O(1)
         ArrayList<Tupla> nuevoHeap = new ArrayList<Tupla>();
         for(int i =0 ; i<this.tamaño ; i++){ // O(T)
-            // copiaElementos.add(_lista[i]) ;  //O(1)
             nuevoHeap.add(new Tupla(_lista[i]));
             nuevoHeap.get(i).nodo.modificarPosicion(i);
         }
@@ -83,9 +81,23 @@ public class Heap<T extends Comparable<T>>{
     public void swap(int i, int j) {  //O(1)
         Tupla tmp = heap.get(i);  //O(1)
         heap.set(i, heap.get(j));
-        heap.set(j,tmp);  //O(1)
+        heap.set(j,tmp);  //O(1)   
+
+        // heap.get(i).nodo().modificarPosicion(i);
+        // heap.get(j).nodo().modificarPosicion(j);
+
     }
 
+        // Método que actualiza posición en heap si el elemento es Usuario (u otro con método actualizarPosicionEnHeap)
+    // private void actualizarPosicion(T elemento, int posicion) {
+    //     // Aquí chequeamos si elemento tiene método actualizarPosicionEnHeap
+    //     // Para no usar interfaces ni reflexión, vamos a hacer un casteo seguro para Usuario
+    //     if (elemento instanceof aed.Clases.Usuario) {
+    //         ((aed.Clases.Usuario) elemento).(posicion);
+    //     }
+    //     // Si tuvieras otros tipos con método similar, agregarlos acá.
+    //     // Para Transaccion no se hace nada
+    // }
 
     public ArrayList<Tupla> devolverHeap (){
         return heap ;
