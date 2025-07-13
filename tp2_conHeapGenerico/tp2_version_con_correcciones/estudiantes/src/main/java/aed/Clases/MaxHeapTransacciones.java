@@ -44,8 +44,7 @@ public class MaxHeapTransacciones {
     // }
 
 
-    // Constructor MaxHeapTransacciones() tiene complejidad O(T) pues si bien hay 3 ciclos, 
-    //son independientes uno de otro, por ende la complejidad se lo lleva el maximo entre O(T) y O(log(T)) que es O(T)
+    // Constructor MaxHeapTransacciones() tiene complejidad O(T)
     public MaxHeapTransacciones(Transaccion[] transacciones) {
         this.tamaño = transacciones.length; // O(1)
         this.transaccionesOriginal = new Transaccion[tamaño]; // O(1)
@@ -61,7 +60,7 @@ public class MaxHeapTransacciones {
             }
         }
 
-        this.heap = new Heap<>(copia); // Construye heap genérico
+        this.heap = new Heap<>(copia); // O(T)  (por heapify)
     }
     
     // Metodo desencolar() tiene complejidad O(log(T)) pues en el peor caso entra al if y queda O(1)+O(log(T)) => O(max{1,log(T)}) = O(log(T))
@@ -104,28 +103,6 @@ public class MaxHeapTransacciones {
         return -1;
     }
 
-    // // Metodo bajar() tiene complejidad O(log(T))
-    // private void bajar(int i) {
-    //     while (true) {  // Este ciclo siempre va a estar comparando una cantidad de veces como mucho igual a la altura del heap, que podemos pensarlo como altura = log(T)
-    //         int izq = 2 * i + 1;  //O(1)
-    //         int der = 2 * i + 2;  //O(1)
-    //         int mayor = i;  //O(1)
-
-    //         if (izq < tamaño && heap[izq].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
-    //             mayor = izq;  //O(1)
-    //         }
-    //         if (der < tamaño && heap[der].elemento.compareTo(heap[mayor].elemento) > 0){  //O(1)
-    //             mayor = der;  //O(1)
-    //         }
-    //         if (mayor != i) {  //O(1)
-    //             Heap tmp = heap[i] ;  // O(1)
-    //             heap[i] = heap[mayor];  //O(1)
-    //             heap[mayor] = tmp;   //O(1)
-    //             i = mayor;  //O(1)
-    //         } else break;  //O(1)
-    //     }
-    // }
-
     // Metodo transaccionMayorValor() tiene complejidad O(1) pues hace un retorno que usa un metodo en O(1)
     public Transaccion transaccionMayorValor(){  //O(1)
         return heap.maximo();  //O(1)
@@ -140,35 +117,18 @@ public class MaxHeapTransacciones {
     // De esta manera cuando desencolemos, no vamos a estar cambiando los indices o cambiando el tamaño del atributo transaccionesOriginal
     // para no perder la referencia con posicion de la tupla (Transaccion, posicion) correspondiente al atributo heap.
 
-    // Metodo copia() tiene complejidad O(T) pues en el peor caso recorre todo el arreglo de transacciones
-    public Transaccion[] copiaDeTransacciones (){
-        // Transaccion[] copiaTransacciones = new Transaccion[tamaño];  //O(1)
-        // // int i = 0 ;  //O(1)
-        // int j = 0 ;  //O(1)
-        // if (heap.length == 0){  //O(1)
-        //     return new Transaccion[0];  //O(1)
-        // }
-        // while (i<tamaño){ // O(T)
-        //     if (transaccionesOriginal[j] != null){  //O(1)
-        //         copiaTransacciones[i] = transaccionesOriginal[j] ;  //O(1)
-        //         i ++;  //O(1)
-        //         j ++;  //O(1)
-        //     } else {  //O(1)
-        //         j ++;  //O(1)
-        //     }
-        // }
-        // return copiaTransacciones;  //O(1)
-       Transaccion[] copia = new Transaccion[tamaño];
-        int j = 0;
+    // Metodo copiaDeTransacciones() tiene complejidad O(T) ya que recorre todo el arreglo de transacciones
+    public Transaccion[] copiaDeTransacciones (){  // O(T)
+       Transaccion[] copia = new Transaccion[tamaño];  // O(1)
+        int j = 0;  // O(1)
 
-        for (Transaccion t : transaccionesOriginal) {
-            if (t != null) {
-                copia[j] = t;
-                j ++;
+        for (Transaccion t : transaccionesOriginal) { // O(T)
+            if (t != null) {  // O(1)
+                copia[j] = t;  // O(1)
+                j ++;  // O(1)
             }
         }
         return copia;
-
     }
     
     // Metodo tamano() tiene complejidad O(1) pues es un solo return
@@ -177,7 +137,7 @@ public class MaxHeapTransacciones {
     }
 
     // Metodo montoPromedio() tiene complejidad O(1) pues solo es un condicional con return en O(1)
-    public int montoPromedio(){
+    public int montoPromedio(){  // O(1)
         if (tamañoSinCreacion == 0 ){  //O(1)
             return 0;  //O(1)
         }   

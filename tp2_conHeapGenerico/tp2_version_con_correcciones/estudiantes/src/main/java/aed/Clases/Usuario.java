@@ -44,10 +44,10 @@ public class Usuario implements Comparable<Usuario>, HeapElement {
         return id;    // O(1)
     }
 
-    // Metodo modificarPosicion() tiene complejidad O(1) pues solo es una asignacion
-    public void actualizarPosicionEnHeap(int _posicion){    // O(1)
-        handle.modificarPosicion(_posicion);        // O(1)
-    }
+    // // Metodo modificarPosicion() tiene complejidad O(1) pues solo es una asignacion
+    // public void actualizarPosicionEnHeap(int _posicion){    // O(1)
+    //     handle.modificarPosicion(_posicion);        // O(1)
+    // }
 
     @Override
     public void actualizarPosicion(int nuevaPos) { // O(1)
