@@ -6,52 +6,44 @@ import aed.*;
 
 public class MaxHeapTransacciones {
 
-    private Heap<Transaccion> heap;
+    private Heap<Tupla> heap;
     private Transaccion[] transaccionesOriginal;
     private int tamaño;
     private int montoTotalSinCreacion;
     private int tamañoSinCreacion;
 
-    // private class Heap {
-    //     private Transaccion elemento;
-    //     private Handle nodo;
-    //     public Heap (Transaccion i){ // O(1)
-    //         this.elemento = i;  // O(1)
-    //         this.nodo = new Handle(-1);  // O(1)
-    //     }
-    // }
+    private class Tupla implements Comparable<Tupla> {
+        private Transaccion elemento;
+        private Handle posicion;
+        private Tupla (Transaccion e, int pos){ // O(1)
+            this.elemento = e;  // O(1)
+            this.posicion = new Handle(pos);  // O(1)
+        }
 
-    // Constructor MaxHeapTransacciones() tiene complejidad O(T) pues si bien hay 3 ciclos, son independientes uno de otro, por ende la complejidad se lo lleva el maximo entre O(T) y O(log(T)) que es O(T)
-    // public MaxHeapTransacciones(Transaccion[] transacciones) {
-    //     this.tamaño = transacciones.length;  //O(1)
-    //     Transaccion[] copiaTransacciones = new Transaccion[this.tamaño];  //O(1)
-    //     for(int i =0 ; i<this.tamaño ; i++){ // O(T)
-    //     copiaTransacciones[i] = transacciones[i] ;  //O(1)
-    //     if (transacciones[i].id_comprador() != 0){  //O(1)
-    //         montoTotalSinCreacion = montoTotalSinCreacion + transacciones[i].monto() ;  //O(1)
-    //         tamañoSinCreacion ++ ;  //O(1)
-    //     }
-    //     }
-    //     this.heap = new Heap[tamaño];  //O(1)
-    //     for (int i = 0; i < tamaño; i++) { //O(T)
-    //         heap[i] = new Heap(transacciones[i]);  //O(1)
-    //         heap[i].nodo.modificarPosicion(i);
-    //     }
-    //     for (int i = tamaño / 2 - 1; i >= 0; i--) { // O(log(T))
-    //         bajar(i);   // O(log(T))
-    //     }
-    //     this.transaccionesOriginal = copiaTransacciones;  //O(1)
-    // }
+        public int posicion(){ // O(1)
+            return posicion.posicion(); // O(1)
+        }
+
+        @Override
+        public int compareTo(Tupla otro) {  // O(1)
+            if(otro == null){  //O(1)
+                String mensajeDeError = "No puede compararse con null";  //O(1)
+                throw new IllegalArgumentException(mensajeDeError);  //O(1)
+            }
+            return elemento.compareTo(otro.elemento); // O(1)
+        }
+    } // Aca termina la clase Tupla
 
 
     // Constructor MaxHeapTransacciones() tiene complejidad O(T)
     public MaxHeapTransacciones(Transaccion[] transacciones) {
         this.tamaño = transacciones.length; // O(1)
         this.transaccionesOriginal = new Transaccion[tamaño]; // O(1)
-        Transaccion[] copia = new Transaccion[tamaño];   // O(1)
+        Tupla[] copia = new Tupla[tamaño];   // O(1)
 
         for (int i = 0; i < tamaño; i++) {  // O(T)
-            copia[i] = transacciones[i];   // O(1)
+            Tupla nuevaTupla = new Tupla(transacciones[i], i);
+            copia[i] = nuevaTupla;   // O(1)
             transaccionesOriginal[i] = transacciones[i];  // O(1)
 
             if (transacciones[i].id_comprador() != 0) {   // O(1)
@@ -63,60 +55,27 @@ public class MaxHeapTransacciones {
         this.heap = new Heap<>(copia); // O(T)  (por heapify)
     }
     
-    // Metodo desencolar() tiene complejidad O(log(T)) pues en el peor caso entra al if y queda O(1)+O(log(T)) => O(max{1,log(T)}) = O(log(T))
-    // public void desencolar() {
-    //     if (heap.length==1){   //O(1)
-    //         heap = new Heap[0];  //O(1)
-    //         transaccionesOriginal = new Transaccion[0];  //O(1)
-    //         tamaño --;  //O(1)
-    //         return ;  //O(1)
-    //     }
-    //     Heap max = heap[0];  //O(1)
-    //     heap[0] = heap[tamaño-1];  //O(1)
-    //     bajar(0);   //O(log(T))
-        
-    //     // Ahora vamos a modificar transaccionesOriginal
-    //     transaccionesOriginal[max.nodo.posicion()] = null ;  //O(1)   //esta parte es para cuando hacemos copiaTransacciones
-    //     tamaño -- ;  //O(1)
-    // }
-    public void desencolar() {
+    // El metodo desencolar() tiene complejidad O(log(T))
+    public void desencolar() {  //O(log(T))
         if (heap.tamaño() == 0) {  // O(1)
             return;
         }
-        Transaccion max = heap.maximo();  // O(1)
-        int posicion = buscarPosicionOriginal(max); 
+        int posicion = heap.maximo().posicion(); // O(1)
         if (posicion != -1) {  // O(1)
             transaccionesOriginal[posicion] = null;  // O(1)
         }
 
-        heap.desencolar(); // O(log T)
+        heap.desencolar(); // O(log T)    // aca el desencolar es el del metodo del Heap generico
         tamaño--;  // O(1)
-    }
-
-    // O(T)
-    private int buscarPosicionOriginal(Transaccion t) {
-        for (int i = 0; i < transaccionesOriginal.length; i++) {
-            if (transaccionesOriginal[i] == t) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     // Metodo transaccionMayorValor() tiene complejidad O(1) pues hace un retorno que usa un metodo en O(1)
     public Transaccion transaccionMayorValor(){  //O(1)
-        return heap.maximo();  //O(1)
+        return heap.maximo().elemento;  //O(1)
     }
 
     // Aclaracion: la idea es mantener el mismo tamaño del arreglo heap
     // Luego cuando usemos el metodo copiar() recorreremos uno x uno ( O(T) ), y copiaremos todo menos los elementos que sean null.
-    // Lo hacemos de esta manera para no perder la referencia que tiene el atributo heap que es de clase Heap[]
-    // que recordemos heap tiene la forma de una tupla:   (Transaccion,posicion)
-    // esta posicion es exactamente el indice en el que se encontraba la transaccion cuando nos la dieron por parametro 
-    // al agregar bloque, es decir, en forma ordenada. 
-    // De esta manera cuando desencolemos, no vamos a estar cambiando los indices o cambiando el tamaño del atributo transaccionesOriginal
-    // para no perder la referencia con posicion de la tupla (Transaccion, posicion) correspondiente al atributo heap.
-
     // Metodo copiaDeTransacciones() tiene complejidad O(T) ya que recorre todo el arreglo de transacciones
     public Transaccion[] copiaDeTransacciones (){  // O(T)
        Transaccion[] copia = new Transaccion[tamaño];  // O(1)

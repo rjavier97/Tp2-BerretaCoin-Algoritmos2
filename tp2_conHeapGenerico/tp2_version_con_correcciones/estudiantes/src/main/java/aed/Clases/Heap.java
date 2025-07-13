@@ -1,7 +1,5 @@
 package aed.Clases;
 
-// import aed.Clases.MaxHeapUsuarios.HeapElement;
-
 public class Heap<T extends Comparable<T> > {
     private T[] elementos;
     private int tamaño;
@@ -21,7 +19,7 @@ public class Heap<T extends Comparable<T> > {
         }    
         swap(0, tamaño - 1); // O(1)
         tamaño--; // O(1)
-        bajar(0); // O(log P)
+        bajar(0); // O(log n)
     }
 
     public T maximo() { // O(1)

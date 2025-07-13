@@ -52,9 +52,4 @@ public class MaxHeapUsuarios {
     public interface HeapElement {
         void actualizarPosicion(int nuevaPos);
     }
-}
-
-
-
-
-             
+}        
