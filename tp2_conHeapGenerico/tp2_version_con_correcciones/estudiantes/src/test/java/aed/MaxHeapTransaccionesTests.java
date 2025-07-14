@@ -35,13 +35,14 @@ Transaccion[] transacciones = new Transaccion[] {tx_una, tx_dos, tx_tres, tx_cua
         int tamaño = heap_transacciones.length;
 
         for(int i=0; i<5; i++){
-            assertEquals(heap_transacciones[i], heaptx.transaccionMayorValor()); // Cheaquea que la transaccion sea la de mayor monto
+            assertEquals(heap_transacciones[i], heaptx.transaccionMayorValor()); // Chequea que la transaccion sea la de mayor monto
             heaptx.desencolar(); // Desencolo la transaccion de mayor valor del heaptx
             tamaño --; 
-            assertEquals(tamaño, heaptx.tamaño()); // Chequeo que se haya disminuido el tamano
+            assertEquals(tamaño, heaptx.tamaño()); // Chequeo que se haya disminuido el tamaño
+        
         }
-
         assertTrue(0 == heaptx.tamaño()); // El MaxHeapTransacciones quedo vacio
+        
     }
     
     @Test

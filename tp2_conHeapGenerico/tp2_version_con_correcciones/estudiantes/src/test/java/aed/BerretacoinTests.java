@@ -429,6 +429,8 @@ public class BerretacoinTests {
             }
         }
     }
+
+    //---------------------------------------------------------------------------------------------------------------------
     // Casos extra aliasing y caso borde
     @Test
     public void testTxUltimoBloqueAliasing() {

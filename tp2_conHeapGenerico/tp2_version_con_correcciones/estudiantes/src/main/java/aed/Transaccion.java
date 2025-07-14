@@ -46,6 +46,11 @@ public class Transaccion implements Comparable<Transaccion> {
     }
 
     // Metodo monto() tiene complejidad O(1) pues es solo un return
+    public int id() {  //O(1)
+        return id;  //O(1)
+    }
+
+    // Metodo monto() tiene complejidad O(1) pues es solo un return
     public int monto() {  //O(1)
         return monto;  //O(1)
     }

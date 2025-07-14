@@ -113,44 +113,7 @@ public class MaxHeapTransacciones {
         montoTotalSinCreacion = montoTotalSinCreacion - monto ;  //O(1)
         tamañoSinCreacion = _tamañoSinCreacion ;  //O(1)
     }
-    //--------------------------------------------------------------------------------------------------------------------
-
-    // public MaxHeapTransacciones() {  //O(1)
-    //     this.tamaño = 0;  //O(1)
-    //     this.montoTotalSinCreacion = 0;  //O(1)
-    //     this.tamañoSinCreacion = 0;  //O(1)
-    //     this.heap = new Heap[0];  //O(1)
-    //     this.transaccionesOriginal = new Transaccion[0];  //O(1)
-    // }
-
-
-    // public MaxHeapTransacciones testear(Transaccion[] transacciones) {
-    //     MaxHeapTransacciones test = new MaxHeapTransacciones();
-    //     this.tamaño = transacciones.length;  //O(1)
-    //     Transaccion[] copiaTransacciones = new Transaccion[this.tamaño];  //O(1)
-    //     int varMonto = 0;
-    //     int varTamaño = 0;
-    //     for(int i =0 ; i<this.tamaño ; i++){ // O(T)
-    //     copiaTransacciones[i] = transacciones[i] ;  //O(1)
-    //     if (transacciones[i].id_comprador() != 0){  //O(1)
-    //         varMonto = varMonto + transacciones[i].monto() ;  //O(1)
-    //         varTamaño ++ ;  //O(1)
-    //     }
-    //     }
-    //     this.montoTotalSinCreacion = varMonto;
-    //     this.tamañoSinCreacion = varTamaño;
-    //     this.heap = new Heap[tamaño];  //O(1)
-    //     for (int i = 0; i < tamaño; i++) { //O(T)
-    //         heap[i] = new Heap(transacciones[i]);  //O(1)
-    //         heap[i].nodo.modificarPosicion(i);
-    //     }
-    //     for (int i = tamaño / 2 - 1; i >= 0; i--) { // O(log(T))
-    //         bajar(i);   // O(log(T))
-    //     }
-    //     this.transaccionesOriginal = copiaTransacciones;  //O(1)
-    //     test = this;
-    //     return test;
-    // }
+    
 }    
 
 
