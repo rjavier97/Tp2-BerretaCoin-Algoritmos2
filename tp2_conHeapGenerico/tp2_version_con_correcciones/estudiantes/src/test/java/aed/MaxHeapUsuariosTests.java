@@ -7,16 +7,22 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import aed.Clases.MaxHeapUsuarios;
 
 public class MaxHeapUsuariosTests {
-    
-@Test
+
 public void creacionNuevosUsuarios() {
     MaxHeapUsuarios heap = new MaxHeapUsuarios(3);
     assertEquals(0, heap.obtenerMonto(1));
     assertEquals(0, heap.obtenerMonto(2));
     assertEquals(0, heap.obtenerMonto(3));
+}
+
+@Test
+public void soloUnUsuario(){
+    MaxHeapUsuarios heap = new MaxHeapUsuarios(1);
+    assertEquals(1, heap.usuarioMayorMonto());
 }
 
 @Test
@@ -43,10 +49,10 @@ public void usuarioMayorMonto() {
     assertEquals(3, heap.usuarioMayorMonto());
     heap.actualizarMonto(3, 10);
     assertEquals(1, heap.usuarioMayorMonto());
-    // usuarios con mayor monto iguales
+    // usuarios con mayor monto iguales devuelve el de menor id
     heap.actualizarMonto(2, 15);
     int mayor = heap.usuarioMayorMonto();
-    assertTrue(mayor == 1 || mayor == 2);
+    assertTrue(mayor == 1);
 }
 
 }
