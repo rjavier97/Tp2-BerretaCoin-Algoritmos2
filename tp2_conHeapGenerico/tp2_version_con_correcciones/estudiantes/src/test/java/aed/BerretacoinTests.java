@@ -429,5 +429,36 @@ public class BerretacoinTests {
             }
         }
     }
+    // Casos extra aliasing y caso borde
+    @Test
+    public void testTxUltimoBloqueAliasing() {
+    Berretacoin berretacoin = new Berretacoin(3);
+
+    Transaccion t1 = new Transaccion(1, 1, 2, 10);
+    Transaccion t2 = new Transaccion(2, 2, 3, 20);
+
+    Transaccion[] bloque = {t1, t2};
+    berretacoin.agregarBloque(bloque);
+
+    Transaccion[] copia = berretacoin.txUltimoBloque();
+
+    // Modifico el primer elemento de la copia del ultimo bloque
+    copia[0] = new Transaccion(999, 9, 9, 999);
+
+    Transaccion[] resultado = berretacoin.txUltimoBloque();
+
+    // Verifico que efectivamente no se hayan cambiado los valores del elemento de ultimo bloque, o sea la original
+    assertEquals(1, resultado[0].id());  
+    assertEquals(1, resultado[0].id_comprador());
+    assertEquals(2, resultado[0].id_vendedor());
+    assertEquals(10, resultado[0].monto());
+    }
+
+    @Test
+    public void testHackearTxBloqueVacio() {
+    Berretacoin berretacoin = new Berretacoin(0);
+    // Se espera que lance error ya que en nuestra especificacion requerimos que el bloque no este vacio
+    assertThrows(NullPointerException.class, () -> berretacoin.hackearTx());    
+    }
 }
 
